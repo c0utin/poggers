@@ -17,7 +17,7 @@ To run the application locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/poggers.git
+   git clone https://github.com/c0utin/poggers.git
    ```
 
 2. Navigate to the project directory:
@@ -40,11 +40,11 @@ To run the application locally, follow these steps:
    npm start
    ```
 
-6. Access the application in your web browser at [http://localhost:3333](http://localhost:3333).
-
+6. Access the application in your web browser
+   
 ### Additional Notes
 
-- Ensure that your database credentials are correctly configured in the application's configuration files.
+- Ensure that your database credentials are correctly configured in AWS.
 
 ### Video Demonstration
 
