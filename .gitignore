@@ -1,0 +1,9 @@
+# Módulos do Node.js
+node_modules/
+
+# Arquivo de cache do npm
+npm-debug.log
+
+# Arquivos de dependências do Yarn
+yarn-error.log
+yarn.lock
