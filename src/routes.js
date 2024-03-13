@@ -16,6 +16,7 @@ router.post("/users", async (request, response) => {
   }
 });
 
+
 router.get("/users", async (request, response) => {
   const userRepository = new UserRepository();
   const users = await userRepository.get()
