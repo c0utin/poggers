@@ -1,11 +1,29 @@
 const express = require("express");
-
-
 const UserRepository = require("./repository/UserRepository");
 const app = express();
 const port = 3333;
 
-// Definindo a rota para obter a lista de usuários
+// Middleware para interpretar corpos de requisição como JSON
+app.use(express.json());
+
+// Rota para adicionar um novo usuário
+app.post("/users", async (req, res) => {
+  try {
+    const { name, email, followers } = req.body;
+    const userRepository = new UserRepository();
+
+    // Insere o novo usuário no banco de dados
+    const newUser = await userRepository.insert({ name, email, followers });
+
+    // Retorna o novo usuário como resposta
+    res.status(201).json(newUser);
+  } catch (error) {
+    // Trata erros
+    res.status(500).json({ message: "Erro ao adicionar novo usuário." });
+  }
+});
+
+// Rota para obter a lista de usuários
 app.get("/users", async (req, res) => {
   try {
     // Simulando a obtenção dos usuários do banco de dados
@@ -47,25 +65,8 @@ app.get("/users", async (req, res) => {
     // Enviando o HTML como resposta
     res.send(html);
   } catch (error) {
-    // Tratando erros
-    res.status(500).send("Erro ao obter lista de usuários.");
-  }
-});
-
-// Rota para inserir um novo usuário
-router.post("/users", async (req, res) => {
-  try {
-    const { name, email, followers } = req.body;
-    const userRepository = new UserRepository();
-
-    // Insere o novo usuário no banco de dados
-    const newUser = await userRepository.insert({ name, email, followers });
-
-    // Retorna o novo usuário como resposta
-    res.status(201).json(newUser);
-  } catch (error) {
     // Trata erros
-    res.status(500).json({ message: "Erro ao inserir novo usuário." });
+    res.status(500).send("Erro ao obter lista de usuários.");
   }
 });
 
