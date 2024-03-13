@@ -1,16 +1,31 @@
 const express = require("express");
 const UserRepository = require("./repository/UserRepository");
-const app = express();
-const port = 3333;
+const router = express.Router();
 
-// Definindo a rota para obter a lista de usuários
-app.get("/users", async (req, res) => {
+// Rota para inserir um novo usuário
+router.post("/users", async (req, res) => {
   try {
-    // Simulando a obtenção dos usuários do banco de dados
+    const { name, email, followers } = req.body;
+    const userRepository = new UserRepository();
+
+    // Insere o novo usuário no banco de dados
+    const newUser = await userRepository.insert({ name, email, followers });
+
+    // Retorna o novo usuário como resposta
+    res.status(201).json(newUser);
+  } catch (error) {
+    // Trata erros
+    res.status(500).json({ message: "Erro ao inserir novo usuário." });
+  }
+});
+
+// Rota para obter a lista de usuários
+router.get("/users", async (req, res) => {
+  try {
     const userRepository = new UserRepository();
     const users = await userRepository.get();
 
-    // Renderizando o HTML com os dados dos usuários
+    // Renderiza o HTML com os dados dos usuários
     const html = `
       <html>
         <head>
@@ -18,7 +33,7 @@ app.get("/users", async (req, res) => {
         </head>
         <body>
           <h1>Lista de Usuários</h1>
-          <table border="1">
+          <table>
             <thead>
               <tr>
                 <th>ID</th>
@@ -42,15 +57,12 @@ app.get("/users", async (req, res) => {
       </html>
     `;
 
-    // Enviando o HTML como resposta
+    // Envia o HTML como resposta
     res.send(html);
   } catch (error) {
-    // Tratando erros
-    res.status(500).send("Erro ao obter lista de usuários.");
+    // Trata erros
+    res.status(500).json({ message: "Erro ao obter lista de usuários." });
   }
 });
 
-// Iniciando o servidor
-app.listen(port, () => {
-  console.log(`Servidor está rodando em http://localhost:${port}`);
-});
+module.exports = router;
