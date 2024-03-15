@@ -48,4 +48,6 @@ To run the application locally, follow these steps:
 
 ### Video Demonstration
 
-A video demonstration of the deployment process and the running services on AWS can be found [preview]([preview](https://drive.google.com/file/d/15FvgZYzRoujZKxGXMs1WRXshREcXvNRY/view?usp=sharing).
+A video demonstration of the deployment process and the running services on AWS can be found
+
+([preview muito lola] (https://drive.google.com/file/d/1DCCt9QSip0qPe1yvOYSb0eOChuyHsY9l/view?usp=drivesdk))
